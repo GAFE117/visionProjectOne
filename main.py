@@ -58,6 +58,7 @@ class Main:
                 return None
         except Exception as e:
             print(f"FATAL ERROR: {e}")
+            input('Presione enter para continuar')
 
     def set_user_salary(self, name=None):
         clear()
@@ -66,6 +67,7 @@ class Main:
             name = input('Ingrese el nombre del usuario:\n')
         if name not in self.users:
             print('ERROR: Usuario no encontrado')
+            input('Presione enter para continuar')
             return None
         print(f'El salario actual de {name} es {self.users[name]}')
         salary = input(f'Ingrese el salario de {name} en pesos:\n')
@@ -79,6 +81,7 @@ class Main:
         name = input('Por favor ingrese el nombre del usuario:\n')
         if name not in self.users:
             print('Usuario no encontrado')
+            input('Presione enter para continuar')
             return None
         print(self.users[name])
         input('Presione enter para continuar')
