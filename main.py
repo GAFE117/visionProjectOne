@@ -12,6 +12,16 @@ class Main:
 
     users = {}
 
+    def capture(self, string=''):
+        print(string)
+        selection = input()
+        try:
+            selection = float(selection)
+        except Exception as e:
+            print(f'ERROR: {e}')
+            input('Presione enter para continuar')
+        return selection
+
     def set_nums(self, num1, num2):
         self.num1, self.num2 = num1, num2
 
@@ -33,32 +43,27 @@ class Main:
             input('Presione enter para continuar')
             clear()
             print('\t\t CALCULATHOR')
-            num1 = input('Ingrese el primer numero:\n')
-            num2 = input('Ingrese el segundo numero:\n')
-            op = input('Seleccione una operacion:\n1) +\n2) -\n3) *\n4) /\n')
-            try:
-                self.set_nums(float(num1), float(num2))
-                op = int(op)
-                print(f'\nEl resultado es: {self.operations(op)}')
-            except Exception as e:
-                print(f"FATAL ERROR: {e}")
-                continue
+            print('1) Nuevo calculo')
+            print('2) Salir')
+            sel = self.capture()
+            if sel == 2:
+                return None
+            num1 = self.capture('Ingrese el primer numero:\n')
+            num2 = self.capture('Ingrese el segundon numero:\n')
+            op = self.capture('Indique la operacion:\n1) +\n2) -\n3) *\n4) /\n')
+            self.set_nums(num1, num2)
+            print(f'\nEl resultado es: {self.operations(op)}')
 
     def add_user(self):
         clear()
         name = input('Ingrese el nombre del nuevo usuario:\n')
         self.users[name] = None
         print('Usuario agregado')
-        sel = input('Dar de alta su salario:\n1) Si\n2)No\n')
-        try:
-            sel = int(sel)
-            if sel == 1:
-                self.set_user_salary(name)
-            else:
-                return None
-        except Exception as e:
-            print(f"FATAL ERROR: {e}")
-            input('Presione enter para continuar')
+        sel = self.capture('Dar de alta su salario:\n1) Si\n2)No\n')
+        if sel == 1:
+            self.set_user_salary(name)
+        else:
+            return None
 
     def set_user_salary(self, name=None):
         clear()
@@ -105,14 +110,35 @@ class Main:
             print('2) Consultar el salario de un usuario')
             print('3) Modificar el salario de un usuario')
             print('4) Salir')
-            selection = input()
-            try:
-                selection = int(selection)
-                if selection == 4:
-                    return None
-                self.action(selection)
-            except Exception as e:
-                print(f'FATAL ERROR 01: {e}')
+            selection = self.capture()
+            if selection == 4:
+                return None
+            self.action(selection)
+
+    def create_csv_resources(self):
+
+
+    def csv_action(self, selection):
+        if selection == 1:
+        elif selection == 2:
+        elif selection == 3:
+        elif selection == 4:
+
+    def csv_menu(self):
+        self.create_csv_resources()
+        while True:
+            clear()
+            print('\tREGISTRATHOR 2.0')
+            print('Que desea hacer:')
+            print('1) Agregar un nuevo estudiante (Nombre)')
+            print('2) Cambiar el nombre de un estudiante')
+            print('3) Borrar un estudiante')
+            print('4) Listar todos los estudiantes')
+            print('5) Salir')
+            selection = self.capture()
+            if selection == 5:
+                return None
+            self.csv_action(selection)
 
 
 def main():
